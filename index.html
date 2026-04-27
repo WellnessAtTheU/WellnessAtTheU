@@ -741,7 +741,7 @@
         <a href="retreat.html" role="menuitem">
           <span class="tm-icon">🗓️</span>
           <div>
-            <div class="tm-title">Staff Retreat 2025</div>
+            <div class="tm-title">Staff Retreat 2026</div>
             <div class="tm-sub">Program, materials, and agenda</div>
           </div>
         </a>
@@ -757,6 +757,13 @@
           <div>
             <div class="tm-title">KPI Dashboard</div>
             <div class="tm-sub">FY25 + Healthy Minds Study</div>
+          </div>
+        </a>
+        <a href="strategic-initiatives.html" role="menuitem">
+          <span class="tm-icon">🌅</span>
+          <div>
+            <div class="tm-title">Strategic Initiatives</div>
+            <div class="tm-sub">All 23 initiatives — flip cards</div>
           </div>
         </a>
       </div>
@@ -792,6 +799,11 @@
         <div class="stat-label">Division-Level<br>KPIs</div>
       </div>
     </div>
+    <a href="strategic-initiatives.html" style="display:inline-flex; align-items:center; gap:10px; margin-top:24px; background:rgba(255,255,255,0.12); color:#fff; padding:10px 18px; border-radius:24px; font-size:13px; font-weight:600; text-decoration:none; border:1.5px solid rgba(255,255,255,0.3); backdrop-filter:blur(8px); transition:all 0.2s;">
+      <span style="font-size:16px;">🌅</span>
+      <span><strong style="color:#FFD580;">NEW</strong> &nbsp;·&nbsp; Strategic Initiatives Landscape — All 23 initiatives in one place</span>
+      <span style="font-size:14px;">→</span>
+    </a>
   </div>
 </div>
 
@@ -799,28 +811,54 @@
 <div class="main">
   <div class="left-col">
 
-    <!-- KPI STRIP -->
+    <!-- KPI DASHBOARD (relocated from bottom — interactive expandable cards) -->
     <div class="section-label">Division Key Performance Indicators — FY2025</div>
-    <div class="kpi-strip">
-      <div class="kpi-item">
-        <div class="kpi-num">88%</div>
-        <div class="kpi-label">Well-being Self-Perception Index</div>
-        <div class="kpi-trend trend-up">▲ Target: 89%</div>
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">Division-Level Key Performance Indicators</span>
+        <span class="updated-badge">FY2025 — 4 KPIs</span>
       </div>
-      <div class="kpi-item">
-        <div class="kpi-num">42%</div>
-        <div class="kpi-label">Campus Climate for Well-being</div>
-        <div class="kpi-trend trend-up">▲ Target: 43%</div>
-      </div>
-      <div class="kpi-item">
-        <div class="kpi-num">44%</div>
-        <div class="kpi-label">Culture of Care Score</div>
-        <div class="kpi-trend trend-up">▲ Target: 45%</div>
-      </div>
-      <div class="kpi-item">
-        <div class="kpi-num">68%</div>
-        <div class="kpi-label">Support Services Utilization</div>
-        <div class="kpi-trend trend-up">▲ Growing</div>
+      <div style="padding:16px 20px 8px;">
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+
+          <div id="kpi-card-0" onclick="toggleKpi(0)" style="background:#FEF2F2; border:1.5px solid #CC0000; border-radius:10px; padding:14px; cursor:pointer; transition:all 0.2s;">
+            <div style="font-size:10px; font-weight:700; color:#CC0000; letter-spacing:0.08em; margin-bottom:4px;">WELL-BEING SELF-PERCEPTION</div>
+            <div style="font-size:28px; font-weight:700; color:#CC0000; line-height:1;">88<span style="font-size:16px;">%</span></div>
+            <div style="font-size:11px; color:#666; margin-top:4px;">Target: 89% · Base: 88%</div>
+            <div id="kpi-detail-0" style="display:none; margin-top:10px; border-top:1px solid #FCA5A5; padding-top:10px;">
+              <div style="font-size:12px; color:#1E293B; line-height:1.6;"><strong>What it measures:</strong> % of students who rate their overall health as "good" or better.<br><strong>Data source:</strong> NCHA Survey<br><strong>Question:</strong> "How would you describe your overall health?"<br><strong>Linked to:</strong> Health Literacy Canvas Course · Coaching/Peer Navigation · Preventive Outreach</div>
+            </div>
+          </div>
+
+          <div id="kpi-card-1" onclick="toggleKpi(1)" style="background:#E0F7FA; border:1.5px solid #006064; border-radius:10px; padding:14px; cursor:pointer; transition:all 0.2s;">
+            <div style="font-size:10px; font-weight:700; color:#006064; letter-spacing:0.08em; margin-bottom:4px;">CAMPUS CLIMATE FOR WELL-BEING</div>
+            <div style="font-size:28px; font-weight:700; color:#006064; line-height:1;">42<span style="font-size:16px;">%</span></div>
+            <div style="font-size:11px; color:#666; margin-top:4px;">Target: 43% · Base: 42%</div>
+            <div id="kpi-detail-1" style="display:none; margin-top:10px; border-top:1px solid #80CBC4; padding-top:10px;">
+              <div style="font-size:12px; color:#1E293B; line-height:1.6;"><strong>What it measures:</strong> % of students who agree the U prioritizes health and supports open dialogue about wellness.<br><strong>Data source:</strong> NCHA Survey<br><strong>Questions:</strong> "I feel students' health is a priority at the U" · "The U encourages open discussion about health"<br><strong>Linked to:</strong> Health Communications Pilot · Branding & Social Norming · Advisory Board</div>
+            </div>
+          </div>
+
+          <div id="kpi-card-2" onclick="toggleKpi(2)" style="background:#FEF3C7; border:1.5px solid #B45309; border-radius:10px; padding:14px; cursor:pointer; transition:all 0.2s;">
+            <div style="font-size:10px; font-weight:700; color:#B45309; letter-spacing:0.08em; margin-bottom:4px;">CULTURE OF CARE SCORE</div>
+            <div style="font-size:28px; font-weight:700; color:#B45309; line-height:1;">44<span style="font-size:16px;">%</span></div>
+            <div style="font-size:11px; color:#666; margin-top:4px;">Target: 45% · Base: 44%</div>
+            <div id="kpi-detail-2" style="display:none; margin-top:10px; border-top:1px solid #FCD34D; padding-top:10px;">
+              <div style="font-size:12px; color:#1E293B; line-height:1.6;"><strong>What it measures:</strong> % of students who agree campus provides mutual support and care for one another.<br><strong>Data source:</strong> NCHA Survey<br><strong>Question:</strong> "We are a campus where we look out for each other."<br><strong>Linked to:</strong> Peer Well-Being Navigators · Spiritual Wellness · Student Advisory Board</div>
+            </div>
+          </div>
+
+          <div id="kpi-card-3" onclick="toggleKpi(3)" style="background:#DBEAFE; border:1.5px solid #1D4ED8; border-radius:10px; padding:14px; cursor:pointer; transition:all 0.2s;">
+            <div style="font-size:10px; font-weight:700; color:#1D4ED8; letter-spacing:0.08em; margin-bottom:4px;">SUPPORT SERVICES UTILIZATION</div>
+            <div style="font-size:28px; font-weight:700; color:#1D4ED8; line-height:1;">68<span style="font-size:16px;">%</span></div>
+            <div style="font-size:11px; color:#666; margin-top:4px;">Target: Growing · 71K+ interactions</div>
+            <div id="kpi-detail-3" style="display:none; margin-top:10px; border-top:1px solid #93C5FD; padding-top:10px;">
+              <div style="font-size:12px; color:#1E293B; line-height:1.6;"><strong>What it measures:</strong> # of students (unique and total) utilizing services in the SH&W reporting line.<br><strong>Data source:</strong> Campus Connect · Individual Office Utilization Tracking<br><strong>Targets:</strong> Utilization within dept · All students · Unique students · Programming events<br><strong>Linked to:</strong> Unified EHR (Medicat) · Referral Pathway Development · Utilization Dashboard</div>
+            </div>
+          </div>
+
+        </div>
+        <div style="font-size:11px; color:#94A3B8; margin-top:12px; text-align:center;">Click any KPI card to expand details · Data source: NCHA Survey · FY2025</div>
       </div>
     </div>
 
@@ -836,9 +874,9 @@
         <div class="ann-icon" style="background: #fef2f2;">🎉</div>
         <div class="ann-content">
           <span class="ann-tag" style="background: #fef2f2; color: #cc0000;">All-Teams Retreat</span>
-          <div class="ann-title">All-Teams Retreat — Thursday, May 8, 2025 · 9:00 AM–3:00 PM</div>
+          <div class="ann-title">All-Teams Retreat — Thursday, May 8, 2026 · 9:00 AM–3:00 PM</div>
           <div class="ann-body">Our annual division-wide retreat brings every department under one roof for connection, clarity, and shared direction. Check-in and breakfast begin at 9:00 AM — official program starts at 9:30 AM. Full day of programming including Impact Report conversation, Director Speed Rounds, Interactive Activity, Branding Launch, and Wellness Your Way.</div>
-          <div class="ann-date">May 8, 2025 · <a href="https://forms.office.com/r/ZALWCUtR8w" target="_blank" style="color:#cc0000;">Fill out the Pre-Survey →</a></div>
+          <div class="ann-date">May 8, 2026 · <a href="https://forms.office.com/r/ZALWCUtR8w" target="_blank" style="color:#cc0000;">Fill out the Pre-Survey →</a></div>
         </div>
       </div>
 
@@ -988,12 +1026,17 @@
       </div>
       <div style="padding: 20px 16px;">
 
-        <!-- AVP Node -->
-        <div style="display:flex; justify-content:center; margin-bottom:8px;">
+        <!-- AVP + Admin Assistant Row -->
+        <div style="display:flex; justify-content:center; align-items:center; gap:12px; margin-bottom:8px;">
           <div style="background:#CC0000; color:white; border-radius:10px; padding:12px 24px; text-align:center; min-width:220px; box-shadow:0 2px 8px rgba(204,0,0,0.2);">
             <div style="font-size:11px; font-weight:700; letter-spacing:0.08em; opacity:0.85; margin-bottom:3px;">ASSOCIATE VICE PRESIDENT</div>
             <div style="font-size:14px; font-weight:700;">Dr. Sherrá Watkins</div>
             <div style="font-size:11px; opacity:0.8; margin-top:2px;">Student Health & Wellness</div>
+          </div>
+          <div style="background:#FAF7F2; color:#5C5751; border:1.5px solid #E5DFD5; border-radius:8px; padding:8px 12px; text-align:center; min-width:140px; max-width:160px;">
+            <div style="font-size:8px; font-weight:700; letter-spacing:0.08em; color:#C8A24B; margin-bottom:2px;">ADMIN ASSISTANT</div>
+            <div style="font-size:11px; font-weight:700; color:#1F1B17;">Alex Sparks</div>
+            <div style="font-size:9px; opacity:0.7; margin-top:1px;">Office of the AVP</div>
           </div>
         </div>
 
@@ -1117,57 +1160,6 @@
       </div>
     </div>
 
-    <!-- KPI FRAMEWORK POPOUT -->
-    <div class="section-label">KPI Framework</div>
-    <div class="card">
-      <div class="card-header">
-        <span class="card-title">Division-Level Key Performance Indicators</span>
-        <span class="updated-badge">FY2025 — 4 KPIs</span>
-      </div>
-      <div style="padding:16px 20px 8px;">
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
-
-          <div id="kpi-card-0" onclick="toggleKpi(0)" style="background:#FEF2F2; border:1.5px solid #CC0000; border-radius:10px; padding:14px; cursor:pointer; transition:all 0.2s;">
-            <div style="font-size:10px; font-weight:700; color:#CC0000; letter-spacing:0.08em; margin-bottom:4px;">WELL-BEING SELF-PERCEPTION</div>
-            <div style="font-size:28px; font-weight:700; color:#CC0000; line-height:1;">88<span style="font-size:16px;">%</span></div>
-            <div style="font-size:11px; color:#666; margin-top:4px;">Target: 89% · Base: 88%</div>
-            <div id="kpi-detail-0" style="display:none; margin-top:10px; border-top:1px solid #FCA5A5; padding-top:10px;">
-              <div style="font-size:12px; color:#1E293B; line-height:1.6;"><strong>What it measures:</strong> % of students who rate their overall health as "good" or better.<br><strong>Data source:</strong> NCHA Survey<br><strong>Question:</strong> "How would you describe your overall health?"<br><strong>Linked to:</strong> Health Literacy Canvas Course · Coaching/Peer Navigation · Preventive Outreach</div>
-            </div>
-          </div>
-
-          <div id="kpi-card-1" onclick="toggleKpi(1)" style="background:#E0F7FA; border:1.5px solid #006064; border-radius:10px; padding:14px; cursor:pointer; transition:all 0.2s;">
-            <div style="font-size:10px; font-weight:700; color:#006064; letter-spacing:0.08em; margin-bottom:4px;">CAMPUS CLIMATE FOR WELL-BEING</div>
-            <div style="font-size:28px; font-weight:700; color:#006064; line-height:1;">42<span style="font-size:16px;">%</span></div>
-            <div style="font-size:11px; color:#666; margin-top:4px;">Target: 43% · Base: 42%</div>
-            <div id="kpi-detail-1" style="display:none; margin-top:10px; border-top:1px solid #80CBC4; padding-top:10px;">
-              <div style="font-size:12px; color:#1E293B; line-height:1.6;"><strong>What it measures:</strong> % of students who agree the U prioritizes health and supports open dialogue about wellness.<br><strong>Data source:</strong> NCHA Survey<br><strong>Questions:</strong> "I feel students' health is a priority at the U" · "The U encourages open discussion about health"<br><strong>Linked to:</strong> Health Communications Pilot · Branding & Social Norming · Advisory Board</div>
-            </div>
-          </div>
-
-          <div id="kpi-card-2" onclick="toggleKpi(2)" style="background:#FEF3C7; border:1.5px solid #B45309; border-radius:10px; padding:14px; cursor:pointer; transition:all 0.2s;">
-            <div style="font-size:10px; font-weight:700; color:#B45309; letter-spacing:0.08em; margin-bottom:4px;">CULTURE OF CARE SCORE</div>
-            <div style="font-size:28px; font-weight:700; color:#B45309; line-height:1;">44<span style="font-size:16px;">%</span></div>
-            <div style="font-size:11px; color:#666; margin-top:4px;">Target: 45% · Base: 44%</div>
-            <div id="kpi-detail-2" style="display:none; margin-top:10px; border-top:1px solid #FCD34D; padding-top:10px;">
-              <div style="font-size:12px; color:#1E293B; line-height:1.6;"><strong>What it measures:</strong> % of students who agree campus provides mutual support and care for one another.<br><strong>Data source:</strong> NCHA Survey<br><strong>Question:</strong> "We are a campus where we look out for each other."<br><strong>Linked to:</strong> Peer Well-Being Navigators · Spiritual Wellness · Student Advisory Board</div>
-            </div>
-          </div>
-
-          <div id="kpi-card-3" onclick="toggleKpi(3)" style="background:#DBEAFE; border:1.5px solid #1D4ED8; border-radius:10px; padding:14px; cursor:pointer; transition:all 0.2s;">
-            <div style="font-size:10px; font-weight:700; color:#1D4ED8; letter-spacing:0.08em; margin-bottom:4px;">SUPPORT SERVICES UTILIZATION</div>
-            <div style="font-size:28px; font-weight:700; color:#1D4ED8; line-height:1;">68<span style="font-size:16px;">%</span></div>
-            <div style="font-size:11px; color:#666; margin-top:4px;">Target: Growing · 71K+ interactions</div>
-            <div id="kpi-detail-3" style="display:none; margin-top:10px; border-top:1px solid #93C5FD; padding-top:10px;">
-              <div style="font-size:12px; color:#1E293B; line-height:1.6;"><strong>What it measures:</strong> # of students (unique and total) utilizing services in the SH&W reporting line.<br><strong>Data source:</strong> Campus Connect · Individual Office Utilization Tracking<br><strong>Targets:</strong> Utilization within dept · All students · Unique students · Programming events<br><strong>Linked to:</strong> Unified EHR (Medicat) · Referral Pathway Development · Utilization Dashboard</div>
-            </div>
-          </div>
-
-        </div>
-        <div style="font-size:11px; color:#94A3B8; margin-top:12px; text-align:center;">Click any KPI card to expand details · Data source: NCHA Survey · FY2025</div>
-      </div>
-    </div>
-
   </div><!-- end left col -->
 
   <!-- SIDEBAR -->
@@ -1176,7 +1168,7 @@
     <!-- RETREAT CARD -->
     <div class="retreat-card">
       <div class="retreat-eyebrow">Upcoming Event</div>
-      <div class="retreat-date-badge">📅 Thursday, May 8, 2025 · 9:00 AM – 3:00 PM</div>
+      <div class="retreat-date-badge">📅 Thursday, May 8, 2026 · 9:00 AM – 3:00 PM</div>
       <div class="retreat-title">Building the Road Together</div>
       <div class="retreat-desc">Full-day division retreat. Every department. Every staff member. One room. Check-in & breakfast at 9:00 AM — official program begins at 9:30 AM.</div>
       <a href="https://forms.office.com/r/ZALWCUtR8w" class="retreat-btn" target="_blank">Answer the Pre-Survey →</a>
@@ -1225,7 +1217,7 @@
       <div class="side-body" style="font-size:13px; color: var(--slate-mid); line-height:1.65;">
         <p style="margin-bottom:12px;">This hub is for you. If there's something you want to see here — a resource, a link, an update from your department — reach out to:</p>
         <p style="font-weight:600; color:var(--slate); margin-bottom:4px;">Alex Sparks</p>
-        <p style="color:var(--red);">Executive Assistant, SH&W</p>
+        <p style="color:var(--red);">Administrative Assistant, SH&W</p>
         <p style="margin-top:12px; font-size:12px; color:var(--slate-light);">Or contact Charlen McNeil, H&W Strategic Initiatives</p>
       </div>
     </div>
