@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SH&W Strategic Initiatives Landscape · University of Utah</title>
+<meta name="description" content="Student Health & Wellness Strategic Initiatives — flip cards for each active initiative across the SH&W division.">
+<style>
+  :root {
+    --crimson: #7F1D1D;
+    --crimson-dk: #5A1212;
+    --crimson-lt: #B43A3A;
+    --gold: #C8A24B;
+    --cream: #FAF7F2;
+    --warm-gray: #5C5751;
+    --ink: #1F1B17;
+    --soft: #E5DFD5;
+    --white: #FFFFFF;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    line-height: 1.55;
+    min-height: 100vh;
+  }
+
+  /* ─── Top nav (matches Hub style) ───────────────────────────── */
+  .topbar { background: var(--crimson-dk); color: var(--white); padding: 12px 24px; }
+  .topbar-inner { max-width: 1280px; margin: 0 auto; display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+  .topbar-brand { display: flex; align-items: center; gap: 12px; }
+  .topbar-brand-mark {
+    width: 38px; height: 38px; background: var(--white); color: var(--crimson);
+    border-radius: 6px; display: flex; align-items: center; justify-content: center;
+    font-weight: 800; font-family: Georgia, serif; font-size: 22px;
+  }
+  .topbar-brand-text { font-size: 14px; line-height: 1.3; }
+  .topbar-brand-text strong { display: block; font-size: 15px; }
+  .topbar-brand-text small { color: rgba(255,255,255,0.75); }
+  .topbar nav { margin-left: auto; display: flex; gap: 18px; flex-wrap: wrap; }
+  .topbar nav a {
+    color: var(--white); text-decoration: none; font-size: 14px;
+    padding: 6px 10px; border-radius: 4px; opacity: 0.85;
+  }
+  .topbar nav a:hover, .topbar nav a.active { background: rgba(255,255,255,0.1); opacity: 1; }
+
+  /* ─── Header ─────────────────────────────────────────────────── */
+  header.page-header {
+    background: linear-gradient(135deg, var(--crimson-dk) 0%, var(--crimson) 100%);
+    color: var(--white); padding: 60px 24px 70px; text-align: center;
+  }
+  header.page-header .eyebrow {
+    font-size: 12px; letter-spacing: 4px; color: var(--gold);
+    font-weight: 700; text-transform: uppercase; margin-bottom: 14px;
+  }
+  header.page-header h1 {
+    font-family: Georgia, serif; font-size: clamp(34px, 5vw, 54px);
+    font-weight: 800; line-height: 1.1; margin-bottom: 14px;
+  }
+  header.page-header h1 em { color: var(--gold); font-style: italic; }
+  header.page-header p.lede {
+    max-width: 720px; margin: 0 auto; font-size: clamp(15px, 1.6vw, 18px);
+    color: rgba(255,255,255,0.85); line-height: 1.6;
+  }
+
+  /* ─── Filter / count strip ────────────────────────────────────── */
+  .controls {
+    max-width: 1280px; margin: -34px auto 0; padding: 0 24px;
+    position: relative; z-index: 5;
+  }
+  .controls-inner {
+    background: var(--white); border-radius: 10px; padding: 20px 24px;
+    box-shadow: 0 12px 28px rgba(31,27,23,0.10);
+    display: flex; align-items: center; gap: 18px; flex-wrap: wrap;
+  }
+  .count-pill {
+    background: var(--crimson); color: var(--white); padding: 8px 16px;
+    border-radius: 20px; font-size: 13px; font-weight: 700;
+    letter-spacing: 1px; text-transform: uppercase;
+  }
+  .filter-group { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+  .filter-label {
+    font-size: 12px; font-weight: 700; color: var(--warm-gray);
+    text-transform: uppercase; letter-spacing: 1.5px; margin-right: 4px;
+  }
+  .filter-btn {
+    background: var(--cream); border: 1.5px solid var(--soft);
+    color: var(--ink); padding: 6px 14px; border-radius: 16px;
+    font-size: 13px; cursor: pointer; transition: all 0.15s;
+    font-weight: 500;
+  }
+  .filter-btn:hover { border-color: var(--crimson); color: var(--crimson); }
+  .filter-btn.active {
+    background: var(--crimson); border-color: var(--crimson); color: var(--white);
+  }
+  .controls-hint {
+    font-size: 13px; color: var(--warm-gray); font-style: italic;
+    margin-left: auto;
+  }
+
+  /* ─── Card grid ──────────────────────────────────────────────── */
+  .grid {
+    max-width: 1280px; margin: 32px auto 80px; padding: 0 24px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 18px;
+  }
+
+  /* Each .card establishes 3D perspective */
+  .card { perspective: 1200px; height: 320px; cursor: pointer; }
+  .card-inner {
+    position: relative; width: 100%; height: 100%;
+    transition: transform 0.65s cubic-bezier(0.4, 0.0, 0.2, 1);
+    transform-style: preserve-3d;
+  }
+  .card.flipped .card-inner { transform: rotateY(180deg); }
+  .card-front, .card-back {
+    position: absolute; inset: 0; backface-visibility: hidden;
+    border-radius: 10px; padding: 20px;
+    box-shadow: 0 4px 12px rgba(31,27,23,0.08);
+    display: flex; flex-direction: column;
+  }
+
+  /* FRONT — visual recognition card */
+  .card-front {
+    background: var(--white); border: 1.5px solid var(--soft);
+    transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+  }
+  .card:hover .card-front {
+    border-color: var(--crimson);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(127,29,29,0.18);
+  }
+  .card-num {
+    font-family: Georgia, serif; font-size: 40px; font-weight: 700;
+    color: var(--gold); line-height: 1; margin-bottom: 8px;
+  }
+  .card-name {
+    font-family: Georgia, serif; font-size: 19px; font-weight: 700;
+    color: var(--ink); line-height: 1.25; margin-bottom: 12px; flex-grow: 1;
+  }
+  .card-overview {
+    font-size: 13px; color: var(--warm-gray); line-height: 1.5;
+    margin-bottom: 14px;
+  }
+  .card-meta {
+    display: flex; align-items: center; gap: 8px;
+    margin-top: auto; flex-wrap: wrap;
+  }
+  .status-badge {
+    font-size: 10px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 1px; padding: 4px 10px; border-radius: 10px;
+  }
+  .status-active   { background: #D1FAE5; color: #065F46; }
+  .status-progress { background: #FEF3C7; color: #92400E; }
+  .status-launching{ background: #FCE7F3; color: #9D174D; }
+  .status-planning { background: #DBEAFE; color: #1E3A8A; }
+  .status-completed{ background: #E5E7EB; color: #1F2937; }
+  .flip-hint {
+    margin-left: auto; font-size: 11px; color: var(--warm-gray);
+    font-style: italic; opacity: 0.7;
+  }
+
+  /* BACK — substantive info */
+  .card-back {
+    background: var(--crimson-dk); color: var(--white);
+    transform: rotateY(180deg); overflow-y: auto;
+  }
+  .card-back h3 {
+    font-family: Georgia, serif; font-size: 16px;
+    color: var(--gold); margin-bottom: 10px; line-height: 1.2;
+    border-bottom: 1px solid rgba(200,162,75,0.3); padding-bottom: 8px;
+  }
+  .card-back-section { margin-bottom: 11px; }
+  .card-back-label {
+    font-size: 9px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 1.3px; color: var(--gold); margin-bottom: 3px;
+  }
+  .card-back-text {
+    font-size: 12px; color: rgba(255,255,255,0.92);
+    line-height: 1.45;
+  }
+  .card-back-close {
+    position: absolute; top: 10px; right: 12px;
+    background: rgba(255,255,255,0.15); color: var(--white);
+    border: none; width: 24px; height: 24px; border-radius: 50%;
+    cursor: pointer; font-size: 14px; line-height: 1;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .card-back-close:hover { background: rgba(255,255,255,0.25); }
+
+  /* ─── Footer ──────────────────────────────────────────────────── */
+  footer.page-footer {
+    background: var(--crimson-dk); color: rgba(255,255,255,0.8);
+    padding: 36px 24px; text-align: center; font-size: 13px;
+  }
+  footer.page-footer a { color: var(--gold); text-decoration: none; }
+  footer.page-footer strong { color: var(--white); }
+
+  /* ─── Responsive ─────────────────────────────────────────────── */
+  @media (max-width: 640px) {
+    .grid { grid-template-columns: 1fr; }
+    .card { height: 300px; }
+    .controls-hint { width: 100%; margin-left: 0; }
+    header.page-header { padding: 44px 20px 56px; }
+  }
+
+  /* ─── No-flip animation when filter changes ─────────────────── */
+  .card.hidden { display: none; }
+
+  /* ─── Print-friendly ─────────────────────────────────────────── */
+  @media print {
+    .topbar, .controls, footer.page-footer { display: none; }
+    .card { height: auto; page-break-inside: avoid; margin-bottom: 12pt; }
+    .card-inner { transform: none !important; transform-style: flat; }
+    .card-front, .card-back { position: static; backface-visibility: visible; }
+    .card-back { display: none; }
+  }
+
+  /* HORIZONTAL ICON NAV (replaces Tools dropdown) */
+  .hub-nav { display: flex; gap: 4px; align-items: center; flex-wrap: wrap; }
+  .hub-nav-link {
+    display: inline-flex; align-items: center; gap: 8px;
+    color: rgba(255,255,255,0.85); text-decoration: none;
+    padding: 8px 14px; border-radius: 8px;
+    font-size: 13px; font-weight: 500;
+    transition: background 0.15s, color 0.15s;
+    white-space: nowrap;
+  }
+  .hub-nav-link:hover { background: rgba(255,255,255,0.12); color: #fff; }
+  .hub-nav-link.current {
+    background: rgba(255,255,255,0.15);
+    color: #fff;
+    font-weight: 600;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+  }
+  .hub-nav-icon { font-size: 16px; line-height: 1; }
+  @media (max-width: 768px) {
+    .hub-nav-link span:not(.hub-nav-icon) { display: none; }
+    .hub-nav-link { padding: 8px 10px; }
+    .hub-nav-icon { font-size: 18px; }
+  }
+
+  </style>
+</head>
+<body>
+
+<!-- Top nav -->
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="topbar-brand">
+      <div class="topbar-brand-mark">U</div>
+      <div class="topbar-brand-text">
+        <strong>Student Health &amp; Wellness</strong>
+        <small>Division Hub · University of Utah</small>
+      </div>
+    </div>
+    <nav class="hub-nav" role="navigation" aria-label="Site navigation">
+      <a href="index.html" class="hub-nav-link"><span class="hub-nav-icon">🏠</span><span>Hub</span></a>
+      <a href="retreat.html" class="hub-nav-link"><span class="hub-nav-icon">🗓️</span><span>Retreat 2026</span></a>
+      <a href="roadmap.html" class="hub-nav-link"><span class="hub-nav-icon">🗺️</span><span>Roadmap</span></a>
+      <a href="dashboard.html" class="hub-nav-link"><span class="hub-nav-icon">📊</span><span>KPI Dashboard</span></a>
+      <a href="strategic-initiatives.html" class="hub-nav-link current"><span class="hub-nav-icon">🌅</span><span>Initiatives</span></a>
+    </nav>
+  </div>
+</div>
+
+<!-- Header -->
+<header class="page-header">
+  <div class="eyebrow">Strategic Initiatives Landscape · 2024–2027</div>
+  <h1>Every initiative. <em>One page.</em></h1>
+  <p class="lede">
+    Each card represents an active strategic initiative across the Student Health &amp; Wellness division.
+    Click any card to flip it and see overview, current status, key needs, and KPI alignment.
+  </p>
+</header>
+
+<!-- Filter controls -->
+<div class="controls">
+  <div class="controls-inner">
+    <div class="count-pill" id="initiative-count">23 Initiatives</div>
+    <div class="filter-group">
+      <span class="filter-label">Status:</span>
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="active">Active</button>
+      <button class="filter-btn" data-filter="progress">In Progress</button>
+      <button class="filter-btn" data-filter="planning">Planning</button>
+      <button class="filter-btn" data-filter="launching">Launching</button>
+    </div>
+    <div class="controls-hint">Click any card to flip · Click the × to flip back</div>
+  </div>
+</div>
+
+<!-- Card grid -->
+<div class="grid" id="cards-grid"></div>
+
+<!-- Footer -->
+<footer class="page-footer">
+  <strong>Student Health &amp; Wellness</strong> · University of Utah · Division of Student Affairs<br>
+  Updated monthly · Questions? <a href="mailto:WellnessAtTheU@utah.edu">WellnessAtTheU@utah.edu</a>
+</footer>
+
+<script>
+/* =====================================================================
+   ALL STRATEGIC INITIATIVES — SOURCE OF TRUTH
+   Edit this array when initiatives change. Page rebuilds automatically.
+   ===================================================================== */
+const initiatives = [
+  {
+    n: "01",
+    name: "EmpowerEd Health Literacy",
+    overview: "Scalable health literacy course evolving from pilot to integrated first-year learning experience.",
+    goal: "Increase student health literacy and early engagement with wellness resources.",
+    components: "Instructional design vendor; enhanced UX; Undergraduate Studies & FYE collaboration. Contract signed; awaiting kickoff.",
+    status: "progress",
+    statusLabel: "In Progress",
+    timeline: "Relaunch Fall 2026 (current course remains live)",
+    needs: "Vendor support; coordination with Academic Affairs.",
+    kpi: "Well-Being Self-Perception · Campus Climate"
+  },
+  {
+    n: "02",
+    name: "Peer Well-Being Navigators",
+    overview: "Peer-led health navigation and early intervention program.",
+    goal: "Improve access, navigation, and early support across SH&W services.",
+    components: "Student hiring/training; motivational interviewing; confidentiality; Basic Needs integration.",
+    status: "active",
+    statusLabel: "Active & Expanding",
+    timeline: "Active and growing",
+    needs: "Sustainable funding; evaluation tools.",
+    kpi: "Utilization Rates · Culture of Care"
+  },
+  {
+    n: "03",
+    name: "Unified EHR (Medicat)",
+    overview: "Shared EHR across Counseling, Health, Basic Needs, and Wellness.",
+    goal: "Improve continuity of care and referral efficiency.",
+    components: "System integration; referral 'front porch'; Tableau analytics.",
+    status: "active",
+    statusLabel: "Implemented",
+    timeline: "Implemented; ongoing optimization",
+    needs: "Continued configuration; training.",
+    kpi: "Utilization Rates"
+  },
+  {
+    n: "04",
+    name: "Referral Coordination Program",
+    overview: "Standardized cross-department referral workflows with opt-in consent, integrated into Medicat.",
+    goal: "Increase first-appointment show rate and care continuity. Make coordinated care the default — not a benefit only available to students who know how to ask.",
+    components: "Legal-approved consent; opt-out form; staff verbal script; verification checklist; integrated form in Medicat. Currently in pilot between CCW and UCC.",
+    status: "progress",
+    statusLabel: "Pilot Active",
+    timeline: "Soft rollout target: Fall 2026 · Full rollout target: January 2027",
+    needs: "Campus communication plan; remaining department Medicat builds.",
+    kpi: "Utilization Rates · Culture of Care"
+  },
+  {
+    n: "05",
+    name: "Layer 2 Multidisciplinary Coordination Protocol",
+    overview: "Complex case coordination protocol for cases requiring staff-to-staff problem-solving across SH&W and partner offices.",
+    goal: "Surface complex cases at intake (not at escalation). Equity grounding: ensure coordinated care for every student who needs it, not just those whose families demand it.",
+    components: "Five-question decision tree; complexity flags by domain; three tiers of routing (Director-level → Multidisciplinary → AVP-level). Working drafts in review with CDA, HRE.",
+    status: "planning",
+    statusLabel: "In Design",
+    timeline: "Working group convening week of June 9, 2026; rollout aligned with Layer 1",
+    needs: "Director input from Sean Grube (HRE) and Christine Anderson (CDA); ROI form alignment; Medicat documentation interface.",
+    kpi: "Utilization Rates · Culture of Care · Campus Climate"
+  },
+  {
+    n: "06",
+    name: "Medical Student Wellness Program (MSWP) Integration",
+    overview: "Integration of MSWP under Student Affairs with expanded service alignment.",
+    goal: "Ensure equitable, holistic wellness access for medical students.",
+    components: "Alignment with UCC; access to CDA, Financial Wellness, Health Educators.",
+    status: "active",
+    statusLabel: "Active",
+    timeline: "Staffing analysis ongoing",
+    needs: "Staffing analysis; operational alignment.",
+    kpi: "Well-Being Self-Perception · Utilization"
+  },
+  {
+    n: "07",
+    name: "Health Sciences Wellness Expansion",
+    overview: "Planned expansion of wellness services across Health Sciences campus.",
+    goal: "Extend integrated SH&W services to SOM graduate and Health Sciences students.",
+    components: "Clinician capacity review; allied health access pathways.",
+    status: "planning",
+    statusLabel: "Planning Phase",
+    timeline: "Planning phase",
+    needs: "Resource modeling; leadership decisions.",
+    kpi: "Utilization · Campus Climate"
+  },
+  {
+    n: "08",
+    name: "AVP Student Health & Wellness Website",
+    overview: "Unified digital hub for all SH&W services. Wellness Hub website and Division Hub work in parallel.",
+    goal: "Improve access, clarity, and navigation for students seeking SH&W services.",
+    components: "Centralized content; accessibility standards. Written assets submitted to UMC; first draft pending.",
+    status: "progress",
+    statusLabel: "In Progress",
+    timeline: "First draft pending from UMC",
+    needs: "Web development support; UMC delivery.",
+    kpi: "Campus Climate"
+  },
+  {
+    n: "09",
+    name: "SH&W Branding Campaign",
+    overview: "Coordinated identity and messaging initiative across the division.",
+    goal: "Reinforce a unified SH&W identity. Theme adopted: 'Support for Your Well-Being, Your Way.'",
+    components: "Brand framework; messaging rollout; student survey validation. UMC developing initial mockups; marketing toolkit under departmental review.",
+    status: "progress",
+    statusLabel: "In Progress",
+    timeline: "Summer 2026 rollout",
+    needs: "Brand governance; departmental adoption.",
+    kpi: "Campus Climate · Culture of Care"
+  },
+  {
+    n: "10",
+    name: "Grant Writer / Project Manager & Grant Portfolio",
+    overview: "Dedicated role to expand external funding and manage grants strategy.",
+    goal: "Increase sustainable funding for wellness initiatives.",
+    components: "Hire complete (Christa Greenlee, 2026); grant portfolio development; Advancement alignment.",
+    status: "active",
+    statusLabel: "Active",
+    timeline: "Hired; portfolio building underway",
+    needs: "Position funding sustainability; portfolio strategy.",
+    kpi: "Utilization Rates"
+  },
+  {
+    n: "11",
+    name: "SH&W Utilization Dashboard",
+    overview: "Central dashboard of utilization, engagement, and outcomes data across the division.",
+    goal: "Enable data-informed decisions and ROI storytelling.",
+    components: "Data feeds; UAIR partnership (data broker model); success metrics overlay.",
+    status: "progress",
+    statusLabel: "In Development",
+    timeline: "UAIR MOU target: end of month",
+    needs: "Data governance; analytics capacity.",
+    kpi: "All KPIs"
+  },
+  {
+    n: "12",
+    name: "Suicide Prevention Task Force",
+    overview: "Campus-wide task force for prevention, intervention, and postvention.",
+    goal: "Strengthen coordinated suicide prevention and response across the institution.",
+    components: "Three workstreams; volunteer engagement; backbone leadership.",
+    status: "active",
+    statusLabel: "Active",
+    timeline: "Core team convening",
+    needs: "Facilitation; governance structure.",
+    kpi: "Culture of Care · Campus Climate"
+  },
+  {
+    n: "13",
+    name: "2021–2025 Integrated Findings & Impact Report",
+    overview: "First comprehensive SH&W trends report covering pre- and post-COVID periods.",
+    goal: "Establish baseline and inform strategy.",
+    components: "5-year analysis; NCHA & Healthy Minds data integration.",
+    status: "completed",
+    statusLabel: "Completed",
+    timeline: "Completed; distributed division-wide March 2026",
+    needs: "Continued distribution strategy.",
+    kpi: "All KPIs"
+  },
+  {
+    n: "14",
+    name: "Unified Satisfaction Surveys",
+    overview: "Alignment of satisfaction surveys across SH&W units with shared metrics.",
+    goal: "Produce consistent, actionable data tied to student success.",
+    components: "Question standardization; shared metrics; KPI alignment.",
+    status: "progress",
+    statusLabel: "In Progress",
+    timeline: "Summer 2026 revision",
+    needs: "Survey coordination; analytics.",
+    kpi: "Well-Being · Culture of Care"
+  },
+  {
+    n: "15",
+    name: "Unified Pantries (PantrySoft)",
+    overview: "Integration of all campus food pantries (FeedU, Wellness Exchanges, departmental) into one system.",
+    goal: "Improve efficiency and campus-wide food security tracking.",
+    components: "PantrySoft purchase; alignment with Union & other pantries.",
+    status: "progress",
+    statusLabel: "In Progress",
+    timeline: "Target Q3 2026 purchase",
+    needs: "Tech approval; budget.",
+    kpi: "Utilization Rates"
+  },
+  {
+    n: "16",
+    name: "Spiritual Wellness Program",
+    overview: "Integration of spiritual well-being into the SH&W ecosystem — supporting meaning-making, reflection, resilience, and connection across diverse faith and secular identities.",
+    goal: "Normalize spiritual wellness as a core dimension of well-being. Increase accessible, inclusive opportunities for reflection, belonging, meaning-making, and purpose.",
+    components: "Program development and expansion; workshops and small-group offerings; cross-department collaboration; referral pathway alignment.",
+    status: "progress",
+    statusLabel: "Expanding",
+    timeline: "Development & expansion phase",
+    needs: "Defined program structure; staffing model; sustainable funding.",
+    kpi: "Well-Being · Campus Climate · Culture of Care"
+  },
+  {
+    n: "17",
+    name: "Success360 — Financial Wellness (Fidelity)",
+    overview: "Incentivized financial wellness program embedded in First-Year Experience, Fidelity-backed.",
+    goal: "Build long-term financial literacy and behaviors.",
+    components: "Fidelity partnership; incentives; brokerage accounts; curriculum. Currently paused pending Branding completion.",
+    status: "progress",
+    statusLabel: "Paused",
+    timeline: "Target Fall 2027",
+    needs: "Sponsorship funding; tech integration; resume after Branding.",
+    kpi: "Well-Being · Campus Climate"
+  },
+  {
+    n: "18",
+    name: "Incoming Student Wellness Assessment",
+    overview: "Early assessment to identify needs and link incoming students to care during orientation.",
+    goal: "Support early intervention and forecasting.",
+    components: "12–13 yes/no questions covering health, mental health, financial aid, financial wellness, disability. Student version + parent version. Centralized response routing through peer navigators.",
+    status: "launching",
+    statusLabel: "Launching",
+    timeline: "Stretch goal: soft launch May 5 (UAsia, International, Transfer); full launch week of May 20",
+    needs: "Tool finalization (Will's team); response scripts; engineering coordination.",
+    kpi: "Well-Being · Utilization"
+  },
+  {
+    n: "19",
+    name: "QUEST Curriculum Integration",
+    overview: "Integration of health and wellness content into the QUEST first-year program.",
+    goal: "Ensure every first-year student encounters core SH&W content within their academic experience.",
+    components: "Two department leaders volunteering for content mapping; documentation of existing content; identification of integration opportunities.",
+    status: "planning",
+    statusLabel: "Planning Phase",
+    timeline: "Initial meeting with Undergraduate Studies pending",
+    needs: "Faculty Senate process clarification; required approvals; integration pathway.",
+    kpi: "Well-Being · Campus Climate"
+  },
+  {
+    n: "20",
+    name: "Durability Skills Curriculum (Student Employment)",
+    overview: "Core curriculum for SH&W student workers (CCW-led, Campus Recreation excepted) building durability skills with potential micro-credential pathway.",
+    goal: "Build student worker durability skills with formal recognition through Undergraduate Studies micro-credential or Faculty Senate certificate.",
+    components: "Documentation of current curriculum, core tenets, and module-level content mapping. Sabeth leading; Cha supporting.",
+    status: "active",
+    statusLabel: "Active",
+    timeline: "Informal badge first; formal certificate as long-term goal",
+    needs: "Faculty Group/Task Force charge letter from Lori; Brittany as backup.",
+    kpi: "Culture of Care · Utilization"
+  },
+  {
+    n: "21",
+    name: "Guided Service Program",
+    overview: "Coordinated service program for students with moderate-to-high acuity needs requiring multidisciplinary care.",
+    goal: "Ensure continuity and reduce system fragmentation for students with complex needs.",
+    components: "Health navigation; targeted populations; cross-unit care coordination.",
+    status: "active",
+    statusLabel: "Active",
+    timeline: "Pre-committee discussion phase",
+    needs: "Address Jason's questions/concerns before committee convenes; staffing model; referral protocols.",
+    kpi: "Utilization · Culture of Care"
+  },
+  {
+    n: "22",
+    name: "Risk Mitigation Committee",
+    overview: "Cross-divisional committee establishing systematic approach to risk identification and response across SH&W operations.",
+    goal: "Build proactive risk identification and mitigation infrastructure for the division.",
+    components: "Committee establishment; partnership with Stuart (Emergency Management); cross-divisional representation.",
+    status: "planning",
+    statusLabel: "Planning Phase",
+    timeline: "Summer 2026 committee establishment",
+    needs: "Committee charter; member identification; meeting cadence.",
+    kpi: "Campus Climate · All KPIs"
+  },
+  {
+    n: "23",
+    name: "Communicable Disease Response Infrastructure",
+    overview: "Interim SOP and communications framework for responding to communicable disease incidents across the division.",
+    goal: "Ensure FERPA-compliant, coordinated response to communicable disease cases on campus.",
+    components: "Interim Communicable Disease SOP; Communications Package (six draft email templates); Faculty & Staff Decision Guide with decision tree and case study.",
+    status: "planning",
+    statusLabel: "Planning",
+    timeline: "Built March–April 2026 following measles incident",
+    needs: "Ongoing review; integration with broader risk infrastructure.",
+    kpi: "Campus Climate · Culture of Care"
+  }
+];
+
+/* =====================================================================
+   RENDERING
+   ===================================================================== */
+const grid = document.getElementById('cards-grid');
+const countPill = document.getElementById('initiative-count');
+
+function renderCards(filter = 'all') {
+  grid.innerHTML = '';
+  let visible = 0;
+  initiatives.forEach((init) => {
+    const matches = filter === 'all' || init.status === filter;
+    if (!matches) return;
+    visible++;
+
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.dataset.status = init.status;
+    card.innerHTML = `
+      <div class="card-inner">
+        <div class="card-front">
+          <div class="card-num">${init.n}</div>
+          <div class="card-name">${init.name}</div>
+          <div class="card-overview">${init.overview}</div>
+          <div class="card-meta">
+            <span class="status-badge status-${init.status}">${init.statusLabel}</span>
+            <span class="flip-hint">Click to flip ↻</span>
+          </div>
+        </div>
+        <div class="card-back">
+          <button class="card-back-close" aria-label="Flip back">×</button>
+          <h3>${init.name}</h3>
+          <div class="card-back-section">
+            <div class="card-back-label">Intended Goal</div>
+            <div class="card-back-text">${init.goal}</div>
+          </div>
+          <div class="card-back-section">
+            <div class="card-back-label">Key Components</div>
+            <div class="card-back-text">${init.components}</div>
+          </div>
+          <div class="card-back-section">
+            <div class="card-back-label">Timeline</div>
+            <div class="card-back-text">${init.timeline}</div>
+          </div>
+          <div class="card-back-section">
+            <div class="card-back-label">Key Needs</div>
+            <div class="card-back-text">${init.needs}</div>
+          </div>
+          <div class="card-back-section">
+            <div class="card-back-label">KPI Alignment</div>
+            <div class="card-back-text">${init.kpi}</div>
+          </div>
+        </div>
+      </div>`;
+
+    // Click anywhere on card to flip (except close button which has its own handler)
+    card.addEventListener('click', (e) => {
+      if (e.target.closest('.card-back-close')) {
+        card.classList.remove('flipped');
+        e.stopPropagation();
+        return;
+      }
+      card.classList.toggle('flipped');
+    });
+
+    grid.appendChild(card);
+  });
+
+  countPill.textContent = visible === initiatives.length
+    ? `${visible} Initiatives`
+    : `${visible} of ${initiatives.length} Initiatives`;
+}
+
+// Filter buttons
+document.querySelectorAll('.filter-btn').forEach((btn) => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach((b) => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderCards(btn.dataset.filter);
+  });
+});
+
+// Initial render
+renderCards();
+</script>
+
+</body>
+</html>
